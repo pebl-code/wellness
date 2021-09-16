@@ -1,0 +1,7 @@
+.idea/
+*.pyc
+sessions/
+errors/
+languages/
+cron/
+uploads/
