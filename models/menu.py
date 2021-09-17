@@ -19,5 +19,6 @@ if not configuration.get('app.production'):
         (T('Sound'), False, URL('default', 'sounds')),
         (T('Song'), False, URL('default', 'songs')),
         (T('Audiobook'), False, URL('default', 'audiobooks')),
+        (T('Play'), False, URL('default', 'play')),
     ]
 

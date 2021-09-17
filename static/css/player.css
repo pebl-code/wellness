@@ -154,6 +154,15 @@ a {
   text-align: center;
 }
 
+.body__left {
+  padding-top: 1.5rem;
+  padding-bottom: 1.25rem;
+  text-align: left;
+  padding-right: 4rem;
+  padding-left: 4rem;
+}
+
+
 .info__album,
 .info__song {
   margin-bottom: .5rem;

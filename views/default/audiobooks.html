@@ -1,4 +1,6 @@
 {{extend 'layout.html'}}
+{{left_sidebar_enabled = False
+right_sidebar_enabled = False}}
 
 {{block header}}
 
@@ -12,22 +14,28 @@
     }
 </style>
 
-<div class="container" >
-      <div class="body__info">
-        <div class="info__album">{{=mdict['album']}}</div>
-        <div class="info__song">{{=mdict['title']}}</div>
-        <div class="info__artist">{{=mdict['artist']}}</div>
-      </div>
+{{block left_sidebar}}
+<div id="left_sidebar" >
+<div style="padding: 4px;">
+    <div class="container" >
+    <div class="body__left">
+      {{for item in aliste:}}
+         <a href={{=URL('default','do_something', vars=dict(medium=item))}} class="info__song""> {{=item}} </a> <br>
+      {{pass}}
+    </div>
+</div>
+</div>
+</div><!-- left_sidebar -->
+{{end}}
 
-      <div class="body__buttons">
-        <ul class="list list--buttons">
-          <li><a href={{=URL('default','do_something', vars=dict(cmd='backward'))}} class="list__link"><i class="fa fa-step-backward"></i></a></li>
-          <li><a href={{=URL('default','vlc_client', vars=dict(cmd='play_list'))}} class="list__link"><i class="fa fa-stop"></i></a></li>
-          <li><a href={{=URL('default','vlc_client', vars=dict(cmd='play_list'))}} class="list__link"><i class="fa fa-play"></i></a></li>
-          <li><a href={{=URL('default','vlc_client', vars=dict(cmd='play_list'))}} class="list__link"><i class="fa fa-pause"></i></a></li>
-          <li><a href={{=URL('default','do_something', vars=dict(cmd='forward'))}} class="list__link"><i class="fa fa-step-forward"></i></a></li>
-        </ul>
-        <br><br><br><br>
+<div class="container" >
+    <div class="body__info">
+      {{for item in sliste:}}
+         <a href={{=URL('default','do_something', vars=dict(medium=item))}} class="info__song""> {{=item}} </a> <br>
+      {{pass}}
+    </div>
+
+    <div class="body__buttons">
         <ul class="list list--buttons">
         <li><a href="#" class="list__link"><i class="fa fa-heart-o"></i></a></li>
         <li><a href="#" class="list__link"><i class="fa fa-random"></i></a></li>
@@ -35,11 +43,6 @@
         <li><a href="#" class="list__link"><i class="fa fa-ellipsis-h"></i></a></li>
           </ul>
       </div>
-    <div class="body__info">
-      {{for item in mliste:}}
-         <a href={{=URL('default','do_something', vars=dict(medium=item))}} class="info__song""> {{=item}} </a> <br>
-      {{pass}}
-    </div>
 </div>
 
 
