@@ -123,10 +123,8 @@ def change_artist():
 
 
 def change_author():
-    if request.vars.get('page') == 'songs':
-        redirect(URL('default', 'songs', vars=dict(artist=request.vars.get('artist'))))
-    else:
-        redirect(URL('default', 'audiobooks', vars=dict(artist=request.vars.get('artist'))))
+
+    redirect(URL('default', request.vars.get('page'), vars=dict(artist=request.vars.get('artist'))))
 
 
 def change_album():
