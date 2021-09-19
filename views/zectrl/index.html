@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+{{block header}}
+{{end}}
+<style>
+    .row{
+        background-color: #114b6f;
+    }
+
+</style>
+
+<div class="row">
+  <div class="col-md-12">
+    <a class="btn btn-primary" href="http://192.168.4.1" role="button">Lampe</a>
+    <a class="btn btn-danger" href="https://google.com" role="button">Google</a>
+    <a class="btn btn-success" href={{=URL('zectrl','audiobooks.html')}} role="button">myVLC</a>
+  </div>
+</div>
+
+
+
