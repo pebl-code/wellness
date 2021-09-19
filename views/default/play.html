@@ -2,8 +2,8 @@
 {{left_sidebar_enabled = False
 right_sidebar_enabled = False}}
 
-{{block header}}
 
+{{block header}}
 {{end}}
 
 <style>
@@ -15,29 +15,52 @@ right_sidebar_enabled = False}}
 </style>
 
 
+<meta http-equiv="refresh" content="5">
+
 <div class="container" >
       <div class="body__info">
-        <div class="info__album">{{=mdict['album']}}</div>
-        <div class="info__song">{{=mdict['title']}}</div>
-        <div class="info__artist">{{=mdict['artist']}}</div>
+        <div class="info__album">{{=data['album']}}</div>
+        <div class="info__song">{{=data['playing']}}</div>
+        <div class="info__artist">{{=data['artist']}}</div>
+        Current Time: {{=data['current_time']}}
+        Length: {{=data['length']}}
       </div>
 
       <div class="body__buttons">
         <ul class="list list--buttons">
-          <li><a href={{=URL('default','do_something', vars=dict(cmd='backward'))}} class="list__link"><i class="fa fa-step-backward"></i></a></li>
-          <li><a href={{=URL('default','vlc_client', vars=dict(cmd='play_list'))}} class="list__link"><i class="fa fa-stop"></i></a></li>
-          <li><a href={{=URL('default','vlc_client', vars=dict(cmd='play_list'))}} class="list__link"><i class="fa fa-play"></i></a></li>
-          <li><a href={{=URL('default','vlc_client', vars=dict(cmd='play_list'))}} class="list__link"><i class="fa fa-pause"></i></a></li>
-          <li><a href={{=URL('default','do_something', vars=dict(cmd='forward'))}} class="list__link"><i class="fa fa-step-forward"></i></a></li>
+          <li><a href={{=URL('default','vlc_stop')}} class="list__link"><i class="fa fa-stop"></i></a></li>
+          <li><a href={{=URL('default','vlc_play')}} class="list__link"><i class="fa fa-play"></i></a></li>
+          <li><a href={{=URL('default','vlc_pause')}} class="list__link"><i class="fa fa-pause"></i></a></li>
+          <li><a href={{=URL('default','vlc_forward')}} class="list__link"><i class="fa fa-step-forward"></i></a></li>
         </ul>
-        <br><br><br><br>
+        <br><br>
+         <ul class="list list--buttons">
+        <li><a href={{=URL('default','vlc_delta_minus')}} class="list__link"><i class="fa fa-minus-circle"> </i></a></li>
+        {{=data['volume']}}
+        <li><a href={{=URL('default','vlc_delta_plus')}} class="list__link"><i class="fa fa-plus-circle"> </i></a></li>
+        </ul>
+
+
+        <br><br>
         <ul class="list list--buttons">
-        <li><a href="#" class="list__link"><i class="fa fa-heart-o"></i></a></li>
         <li><a href="#" class="list__link"><i class="fa fa-random"></i></a></li>
         <li><a href="#" class="list__link"><i class="fa fa-undo"></i></a></li>
         <li><a href="#" class="list__link"><i class="fa fa-ellipsis-h"></i></a></li>
           </ul>
+
+
+        <div class="body__info">
+
+        Status: {{=data['status']}}
+        {{if data['last_file']: }}
+            <br>
+            {{='Bookmark: '}}
+            {{=data['last_file']}} - {{=data['playtime']}}
+            {{pass}}
+        </div>
       </div>
+
+
 
 </div>
 

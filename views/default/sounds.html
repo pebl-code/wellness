@@ -2,22 +2,15 @@
 
 {{block header}}
 
+{{end}}
+
 <div class="container" >
-    <div class="row">
-        <div class="col-sm">
-            {{for item in aliste:}}
-                <a href={{=URL('default','change_artist', vars=dict(artist=item))}} class="info__song""> {{=item}} </a> <br>
-            {{pass}}
-        </div>
-        <div class="col-sm">
+
             {{=selected_artist}}
             <br><br>
             {{for item in sliste:}}
-                <a href={{=URL('default','do_play', vars=dict(artist=item, album=selected_artist))}} class="info__song"">
-                        {{=item}} </a> <br>
+                <a href={{=URL('default','do_play', vars=dict(song=item[0], album=selected_artist, type='file'))}} class="info__song"">
+                        {{=item[0]}} </a> <br>
             {{pass}}
-        </div>
-    </div>
-</div>
-{{end}}
 
+</div>
