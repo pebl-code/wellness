@@ -40,7 +40,7 @@ right_sidebar_enabled = False}}
             {{#=selected_album}}
             <h1>Album</h1>
             {{for item in bliste:}}
-                <a href={{=URL('default','do_play', vars=dict(song=item[1], album=selected_album, artist=selected_artist, type='file'))}} class="info__song"">
+                <a href={{=URL('default','do_play', vars=dict(title=item[1], album=selected_album, artist=selected_artist, type='file'))}} class="info__song"">
                         {{=item[0]}} </a> <br>
             {{pass}}
         </div>

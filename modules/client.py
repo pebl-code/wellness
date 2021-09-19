@@ -20,9 +20,11 @@ def sender(cmd, arg=None):
 
         if received:
             data = json.loads(received)
+        else:
+            data = dict(error='no response')
 
-        print("Sent:     {}".format(tx_data))
-        print("Received: {}".format(received))
+        # print("Sent:     {}".format(tx_data))
+        # print("Received: {}".format(received))
         print("Data:     {}".format(str(data)))
 
         return data or {}

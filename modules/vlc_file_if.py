@@ -9,7 +9,8 @@ _SELECTOR = {
     'showfile': ['playing.artist', 'playing.album',
                  'playing.playing', 'playing.length', 'playing.current_time',
                  'player.status', 'player.volume', 'player_mode',
-                 'media_folder.bookmark.bookmark.last_file', 'media_folder.bookmark.bookmark.playtime'],
+                 'media_folder.bookmark.bookmark.last_file', 'media_folder.bookmark.bookmark.playtime',
+                 'media_file.file_path'],
     'alias': ['media_file.tags.audio_offset', 'media_folder.bookmark.bookmark.playtime']
 }
 

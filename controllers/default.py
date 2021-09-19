@@ -52,7 +52,6 @@ def audiobooks():
     selected_artist = request.vars.get('artist', '')
     media_list = []
     if selected_artist:
-        print("neue Buchliste von %s", selected_artist[1])
         media_list = data_helper.subfolders(selected_artist[1])
 
     artist_list = data_helper.subfolders(_book_path)
@@ -61,15 +60,17 @@ def audiobooks():
 
 
 def play():
-
     vlcdata = vlc_file_if.VlCDataProvider()
     data = vlcdata.get_data('showfile')
     return dict(data=data)
 
 
 def vlc_play():
-    client.sender('start_play')
-    redirect(URL('default', 'play', vars=request.vars))
+    ret_value = client.sender('start_play')
+    if ret_value.get('error'):
+        print(ret_value.get('error'))
+    else:
+        redirect(URL('default', 'play', vars=request.vars))
 
 
 def vlc_stop():
@@ -102,19 +103,10 @@ def do_something():
 
 
 def do_play():
-    media_dict = dict(title=request.vars.get('title', ''),
-                      artist=request.vars.get('artist', ''),
-                      album=request.vars.get('album', ''))
     if request.vars.get('type') == 'folder':
-        client.sender('set_folder', media_dict['album'])
-
+        client.sender('set_folder', request.vars.get('album', ''))
     if request.vars.get('type') == 'file':
-        client.sender('set_file', media_dict['album'])
-        print('set_file')
-
-    # received = client.sender('get_player_status')
-    # media_dict['player_filepath'] = received.get('player', {}).get('data_path')
-
+        client.sender('set_file', request.vars.get('title', ''))
     redirect(URL('default', 'play'))
 
 
