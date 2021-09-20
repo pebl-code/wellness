@@ -8,9 +8,13 @@ import vlc_file_if
 
 # TODO: kein Bild, dark mode, Volume, Stop mit/ohne Bookmark, Bookmark löschen, Play
 
-_book_path= '/home/kellerk/Musik/Audiobook/'
-_song_path= '/home/kellerk/Musik/Song/'
-_sound_path = '/home/kellerk/Musik/Sound/'
+# _book_path= '/home/kellerk/Musik/Audiobook/'
+# _song_path= '/home/kellerk/Musik/Song/'
+# _sound_path = '/home/kellerk/Musik/Sound/'
+_book_path = configuration.get('media.audiobooks')
+_song_path = configuration.get('media.songs')
+_sound_path = configuration.get('media.sounds')
+
 
 # ---- example index page ----
 def index():

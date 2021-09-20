@@ -30,7 +30,7 @@ def audiobooks():
         # media_list = string_list(39, 39)
         media_list = data_helper.subfolders(selected_artist[1])
     # artist_list = string_list(12, 12)
-    artist_list = data_helper.subfolders('/home/peterl/Comco/')
+    artist_list = data_helper.subfolders('/home/kellerk/Musik/Audiobook/')
 
     return dict(sliste=media_list, aliste=artist_list, selected_artist=selected_artist)
 
