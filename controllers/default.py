@@ -6,7 +6,7 @@ import client
 import data_helper
 import vlc_file_if
 
-# TODO: kein Bild, dark mode, Volume, Stop mit/ohne Bookmark, Bookmark löschen, Play
+# TODO: Auswertung Rückgabewert sender(), Start bei Aufruf play, Bookmark löschen/Play ohne Bookmark, Fehlerbehandlung
 
 # ---- example index page ----
 def index():
@@ -102,18 +102,6 @@ def do_play():
         ret = client.sender('set_file', request.vars.get('title', ''))
     if ret.get('error'):
         redirect(URL('default', 'play', vars=ret))
+
     redirect(URL('default', 'play'))
-
-
-def change_artist():
-    redirect(URL('default', 'sounds', vars=dict(artist=request.vars.get('artist'))))
-
-
-def change_author():
-    redirect(URL('default', request.vars.get('page'), vars=dict(artist=request.vars.get('artist'))))
-
-
-def change_album():
-    print('album= ', request.vars.get('album'))
-    redirect(URL('default', 'songs', vars=request.vars))
 
