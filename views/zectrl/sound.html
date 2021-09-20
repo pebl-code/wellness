@@ -1,0 +1,46 @@
+{{extend 'layout.html'}}
+{{left_sidebar_enabled = False
+right_sidebar_enabled = False}}
+
+{{block header}}
+
+{{end}}
+
+<style>
+    .body {
+        background-color: #ffff6f;
+    },
+    .container,
+    .player__footer {
+        background-color: #114b6f;
+    }
+</style>
+
+{{block left_sidebar}}
+
+{{end}}
+
+<div class="container" >
+   <div class="container" >
+    <div class="row">
+        <div class="col-sm">
+
+            {{for item in artist_list:}}
+                <a href={{=URL('zectrl','audiobooks', vars=dict(selected_artist=item))}} style="text-decoration:none">
+                <div class="{{="dispfield bdIlluminating isselected" if selected_artist[0]==item[0] else "dispfield  bdFrenchblue "}}">
+                    <div><b> {{=str(item[0])}}</b></div>
+                    {{if len(item)==3: }} <div style="font-size: smaller; text-indent:30px;">{{=str(item[2]) + ' ' + sub_name1}}</div> {{pass}}
+                </div>
+                {{pass}}
+        </div>
+        <div class="col-sm">
+            {{#=selected_artist}}
+            {{for item in media_list:}}
+                <a href={{=URL('default','do_play', vars=dict(album=item[1], artist=selected_artist, type='folder'))}} style="text-decoration:none">
+                    <div class="dispfield  bdRaspberry">
+                    <div><b> {{=str(item[0])}}</b></div>
+        </div>
+            {{pass}}
+        </div>
+    </div>
+</div>

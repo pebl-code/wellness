@@ -19,11 +19,37 @@ def string_list(size, length=24):
     return l
 
 
-def audiobooks():
+def audiobook():
     selected_artist = request.vars.get('selected_artist', ('', ''))
+    artist_list = list(data_helper.subfolders('/home/peterl/Comco/'))
     media_list = []
-    if selected_artist[1]:
-         media_list = data_helper.subfolders(selected_artist[1], get_count=False)
-    artist_list = data_helper.subfolders('/home/peterl/Comco/')
+    if artist_list:
+        if selected_artist == ('', ''):
+            selected_artist = artist_list[0]
+        media_list = data_helper.subfolders(selected_artist[1], get_count=False)
 
     return dict(media_list=media_list, artist_list=artist_list, selected_artist=selected_artist, sub_name1='Books')
+
+
+def sound():
+    selected_artist = request.vars.get('selected_artist', ('', ''))
+    artist_list = list(data_helper.subfolders('/home/peterl/Oldes/Musik/bosshoss', sub_sel='files'))
+    media_list = []
+    if artist_list:
+        if selected_artist == ('', ''):
+            selected_artist = artist_list[0]
+        media_list = data_helper.get_media_files(selected_artist[1])
+
+    return dict(media_list=media_list, artist_list=artist_list, selected_artist=selected_artist, sub_name1='Files')
+
+
+def song():
+    selected_artist = request.vars.get('selected_artist', ('', ''))
+    artist_list = list(data_helper.subfolders('/home/peterl/Comco/'))
+    media_list = []
+    if artist_list:
+        if selected_artist == ('', ''):
+            selected_artist = artist_list[0]
+        media_list = data_helper.subfolders(selected_artist[1], get_count=False)
+
+    return dict(media_list=media_list, artist_list=artist_list, selected_artist=selected_artist, sub_name1='Albums')

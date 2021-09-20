@@ -19,7 +19,8 @@ def subfolders(path, get_count=True, sub_sel='folder'):
                 data = sorted([(f.name, f.path, len(subfolderlist(f.path))) for f in os.scandir(path) if f.is_dir() and f.name[0] != '.'])
             else:
                 data = sorted([(f.name, f.path, len(get_media_files(f.path))) for f in os.scandir(path) if f.is_dir() and f.name[0] != '.'])
-            return filter(lambda item: item[2] > 0, data)
+            data = filter(lambda item: item[2] > 0, data)
+            return data
         return sorted([(f.name, f.path) for f in os.scandir(path) if f.is_dir() and f.name[0] != '.'])
     return[]
 
