@@ -22,16 +22,9 @@ def index():
 
 
 def sounds():
-    selected_artist = _sound_path  # request.vars.get('artist', '')
-
-    if selected_artist:
-        media_list = data_helper.get_media_files(selected_artist)
-
-    # for sf in media_list:
-    #     print(sf)
-
-    # artist_list = ["Arist 1", "Artist 2", "Artist 3"]
-    # media_list = ["Book1", "Book2", "Book3", "Book4", "Book5"]
+    selected_artist = ('Sound', _sound_path)
+    if selected_artist[1]:
+        media_list = data_helper.get_media_files(selected_artist[1])
 
     return dict(sliste=media_list, selected_artist=selected_artist)
 
@@ -53,10 +46,11 @@ def songs():
 
 
 def audiobooks():
-    selected_artist = request.vars.get('artist', '')
+    selected_artist = request.vars.get('selected_artist', ('', ''))
     media_list = []
-    if selected_artist:
+    if selected_artist[1]:
         media_list = data_helper.subfolders(selected_artist[1])
+    # artist_list = string_list(12, 12)
 
     artist_list = data_helper.subfolders(_book_path)
 
@@ -64,8 +58,14 @@ def audiobooks():
 
 
 def play():
+    if request.vars.get('error'):
+        response.flash = T(str(request.vars.get('error')))
+
     vlcdata = vlc_file_if.VlCDataProvider()
     data = vlcdata.get_data('showfile')
+    if data.get('file_path') and not data.get('album'):
+        # print(data.get('file_path'))
+        data['album'] = data['file_path'].rsplit('/', 1)[1]
     return dict(data=data)
 
 
@@ -108,9 +108,11 @@ def do_something():
 
 def do_play():
     if request.vars.get('type') == 'folder':
-        client.sender('set_folder', request.vars.get('album', ''))
+        ret = client.sender('set_folder', request.vars.get('album', ''))
     if request.vars.get('type') == 'file':
-        client.sender('set_file', request.vars.get('title', ''))
+        ret = client.sender('set_file', request.vars.get('title', ''))
+    if ret.get('error'):
+        redirect(URL('default', 'play', vars=ret))
     redirect(URL('default', 'play'))
 
 

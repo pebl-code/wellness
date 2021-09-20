@@ -23,17 +23,25 @@ right_sidebar_enabled = False}}
     <div class="row">
         <div class="col-sm">
             <h1>Author</h1>
-            <br>
+
             {{for item in aliste:}}
-                <a href={{=URL('default','change_author', vars=dict(artist=item, page="audiobooks"))}} class="info__song""> {{=item[0]}} </a> <br>
-            {{pass}}
+                <a href={{=URL('default','audiobooks', vars=dict(selected_artist=item))}} style="text-decoration:none">
+                <div class="{{="dispfield darkgr bordered bdIlluminating" if selected_artist[0]==item[0] else "dispfield  bdFrenchblue"}}">
+                    <div><b> {{=str(item[0])}}</b></div>
+
+                </div>
+                </a>
+                {{pass}}
+
         </div>
         <div class="col-sm">
             {{#=selected_artist}}
             <h1>Books</h1>
             {{for item in sliste:}}
-                <a href={{=URL('default','do_play', vars=dict(album=item[1], artist=selected_artist, type='folder'))}} class="info__song"">
-                        {{=item[0]}} </a> <br>
+                <a href={{=URL('default','do_play', vars=dict(album=item[1], artist=selected_artist, type='folder'))}} style="text-decoration:none">
+                    <div class="dispfield  bdRaspberry">
+                    <div><b> {{=str(item[0])}}</b></div>
+        </div>
             {{pass}}
         </div>
     </div>

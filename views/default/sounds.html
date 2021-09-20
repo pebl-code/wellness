@@ -5,11 +5,14 @@
 {{end}}
 
 <div class="container" >
-            {{=selected_artist}}
+            {{=selected_artist[0]}}
             <br><br>
-            {{for item in sliste:}}
-                <a href={{=URL('default','do_play', vars=dict(title=item[1], album=selected_artist, type='file'))}} class="info__song"">
-                        {{=item[0]}} </a> <br>
 
+            {{for item in sliste:}}
+                <a href={{=URL('default','do_play', vars=dict(title=item[1], artist=selected_artist, type='file'))}} style="text-decoration:none">
+                    <div class="dispfield  bdRaspberry">
+                    <div><b> {{=str(item[0])}}</b></div>
+        </div>
             {{pass}}
+
 </div>

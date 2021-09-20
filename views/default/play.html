@@ -19,7 +19,7 @@ right_sidebar_enabled = False}}
 
 <div class="container" >
       <div class="body__info">
-        <div class="info__album">{{=data['album'] if data.get('album') else data['file_path'].rsplit('/', 1)[1]}}</div>
+        <div class="info__album">{{#=data['album'] if data.get('album') else data['file_path'].rsplit('/', 1)[1]}}</div>
         <div class="info__song">{{=data['playing'] if data.get('playing') else ''}}</div>
         <div class="info__artist">{{=data['artist'] if data.get('artist') else ''}}</div>
         Current Time: {{=data['current_time'] if data.get('current_time') else '0'}}
