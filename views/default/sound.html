@@ -7,7 +7,9 @@ right_sidebar_enabled = False}}
 {{end}}
 
 <style>
-    .body,
+    .body {
+        background-color: #ffff6f;
+    },
     .container,
     .player__footer {
         background-color: #114b6f;
@@ -22,21 +24,18 @@ right_sidebar_enabled = False}}
    <div class="container" >
     <div class="row">
         <div class="col-sm">
-            <h1>Author</h1>
-            {{for item in aliste:}}
-                <a href={{=URL('default','audiobooks', vars=dict(selected_artist=item))}} style="text-decoration:none">
-                <div class="{{="dispfield darkgr bordered bdIlluminating" if selected_artist[0]==item[0] else "dispfield  bdFrenchblue"}}">
+
+            {{for item in artist_list:}}
+                <a href={{=URL('default','sound', vars=dict(selected_artist=item))}} style="text-decoration:none">
+                <div class="{{="dispfield bdIlluminating isselected" if selected_artist[0]==item[0] else "dispfield  bdFrenchblue "}}">
                     <div><b> {{=str(item[0])}}</b></div>
-
+                    {{if len(item)==3: }} <div style="font-size: smaller; text-indent:30px;">{{=str(item[2]) + ' ' + sub_name1}}</div> {{pass}}
                 </div>
-                </a>
                 {{pass}}
-
         </div>
         <div class="col-sm">
             {{#=selected_artist}}
-            <h1>Books</h1>
-            {{for item in sliste:}}
+            {{for item in media_list:}}
                 <a href={{=URL('default','do_play', vars=dict(album=item[1], artist=selected_artist, type='folder'))}} style="text-decoration:none">
                     <div class="dispfield  bdRaspberry">
                     <div><b> {{=str(item[0])}}</b></div>
@@ -45,11 +44,3 @@ right_sidebar_enabled = False}}
         </div>
     </div>
 </div>
-
-
-</div>
-
-
-
-
-

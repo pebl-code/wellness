@@ -8,56 +8,42 @@ import vlc_file_if
 
 # TODO: kein Bild, dark mode, Volume, Stop mit/ohne Bookmark, Bookmark löschen, Play
 
-# _book_path= '/home/kellerk/Musik/Audiobook/'
-# _song_path= '/home/kellerk/Musik/Song/'
-# _sound_path = '/home/kellerk/Musik/Sound/'
-_book_path = configuration.get('media.audiobooks')
-_song_path = configuration.get('media.songs')
-_sound_path = configuration.get('media.sounds')
-
-
 # ---- example index page ----
 def index():
     return dict(message=T('Welcome to web2py!'))
 
 
-def sounds():
-    selected_artist = ('Sound', _sound_path)
-    if selected_artist[1]:
+def audiobook():
+    selected_artist = request.vars.get('selected_artist', ('', ''))
+    artist_list = list(data_helper.subfolders(configuration.get('media.audiobooks')))
+    media_list = []
+    if artist_list:
+        if selected_artist == ('', ''):
+            selected_artist = artist_list[0]
+        media_list = data_helper.subfolders(selected_artist[1], get_count=False)
+    return dict(media_list=media_list, artist_list=artist_list, selected_artist=selected_artist, sub_name1='Books')
+
+
+def sound():
+    selected_artist = request.vars.get('selected_artist', ('', ''))
+    artist_list = list(data_helper.subfolders(configuration.get('media.sounds'), sub_sel='files'))
+    media_list = []
+    if artist_list:
+        if selected_artist == ('', ''):
+            selected_artist = artist_list[0]
         media_list = data_helper.get_media_files(selected_artist[1])
+    return dict(media_list=media_list, artist_list=artist_list, selected_artist=selected_artist, sub_name1='Files')
 
-    return dict(sliste=media_list, selected_artist=selected_artist)
 
-
-def songs():
-    # selected_artist = request.vars.get('artist', '')
+def song():
     selected_artist = request.vars.get('selected_artist', ('', ''))
-    # selected_album = request.vars.get('album', '')
-    selected_album = request.vars.get('selected_album', ('', ''))
+    artist_list = list(data_helper.subfolders(configuration.get('media.songs')))
     media_list = []
-    song_list = []
-    # if selected_artist:
-    #     media_list = data_helper.subfolders(selected_artist[1], sub_sel='')
-    if selected_artist[1]:
-        media_list = data_helper.subfolders(selected_artist[1])
-    if selected_album[1]:
-        print('SA: ',selected_album)
-        song_list = data_helper.get_media_files(selected_album[1],sub_sel='')
-
-    artist_list = data_helper.subfolders(_song_path)
-    return dict(sliste=media_list, aliste=artist_list, bliste=song_list,
-                selected_artist=selected_artist, selected_album=selected_album)
-
-
-def audiobooks():
-    selected_artist = request.vars.get('selected_artist', ('', ''))
-    media_list = []
-    if selected_artist[1]:
-        media_list = data_helper.subfolders(selected_artist[1], sub_sel='')
-
-    artist_list = data_helper.subfolders(_book_path)
-
-    return dict(sliste=media_list, aliste=artist_list, selected_artist=selected_artist)
+    if artist_list:
+        if selected_artist == ('', ''):
+            selected_artist = artist_list[0]
+        media_list = data_helper.subfolders(selected_artist[1], get_count=False)
+    return dict(media_list=media_list, artist_list=artist_list, selected_artist=selected_artist, sub_name1='Albums')
 
 
 def play():
