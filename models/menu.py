@@ -16,9 +16,10 @@ response.menu = [
 if not configuration.get('app.production'):
     _app = request.application
     response.menu += [
-        (T('Sound'), False, URL('default', 'sounds')),
-        (T('Song'), False, URL('default', 'songs')),
-        (T('Audiobook'), False, URL('default', 'audiobooks')),
-        (T('Play'), False, URL('default', 'play')),
+        (T('Sound'), False, URL('default', 'sound')),
+        (T('Album'), False, URL('default', 'song')),
+        (T('Audiobook'), False, URL('default', 'audiobook')),
+        (T('Play'), False, URL('default', 'play'))
+
     ]
 

@@ -23,7 +23,6 @@ right_sidebar_enabled = False}}
     <div class="row">
         <div class="col-sm">
             <h1>Author</h1>
-
             {{for item in aliste:}}
                 <a href={{=URL('default','audiobooks', vars=dict(selected_artist=item))}} style="text-decoration:none">
                 <div class="{{="dispfield darkgr bordered bdIlluminating" if selected_artist[0]==item[0] else "dispfield  bdFrenchblue"}}">

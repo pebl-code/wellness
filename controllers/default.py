@@ -30,15 +30,19 @@ def sounds():
 
 
 def songs():
-    selected_artist = request.vars.get('artist', '')
-    selected_album = request.vars.get('album', '')
+    # selected_artist = request.vars.get('artist', '')
+    selected_artist = request.vars.get('selected_artist', ('', ''))
+    # selected_album = request.vars.get('album', '')
+    selected_album = request.vars.get('selected_album', ('', ''))
     media_list = []
     song_list = []
-    if selected_artist:
+    # if selected_artist:
+    #     media_list = data_helper.subfolders(selected_artist[1], sub_sel='')
+    if selected_artist[1]:
         media_list = data_helper.subfolders(selected_artist[1])
-    if selected_album:
+    if selected_album[1]:
         print('SA: ',selected_album)
-        song_list = data_helper.get_media_files(selected_album)
+        song_list = data_helper.get_media_files(selected_album[1],sub_sel='')
 
     artist_list = data_helper.subfolders(_song_path)
     return dict(sliste=media_list, aliste=artist_list, bliste=song_list,
@@ -49,8 +53,7 @@ def audiobooks():
     selected_artist = request.vars.get('selected_artist', ('', ''))
     media_list = []
     if selected_artist[1]:
-        media_list = data_helper.subfolders(selected_artist[1])
-    # artist_list = string_list(12, 12)
+        media_list = data_helper.subfolders(selected_artist[1], sub_sel='')
 
     artist_list = data_helper.subfolders(_book_path)
 
@@ -63,8 +66,8 @@ def play():
 
     vlcdata = vlc_file_if.VlCDataProvider()
     data = vlcdata.get_data('showfile')
+    print(data['file_path'])
     if data.get('file_path') and not data.get('album'):
-        # print(data.get('file_path'))
         data['album'] = data['file_path'].rsplit('/', 1)[1]
     return dict(data=data)
 
@@ -121,7 +124,6 @@ def change_artist():
 
 
 def change_author():
-
     redirect(URL('default', request.vars.get('page'), vars=dict(artist=request.vars.get('artist'))))
 
 

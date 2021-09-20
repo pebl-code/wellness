@@ -32,7 +32,7 @@ html {
 
 body {
   font-family: 'Roboto', Arial, Verdana, sans-serif;
-  background: #114b6f;
+  background: #224b6f;
 }
 
 a {
@@ -96,7 +96,7 @@ a {
   }
 
   a {
-    font-size: 1.15rem;
+    font-size: 3.15rem;
     color: #fff;
   }
 }
