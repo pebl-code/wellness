@@ -26,7 +26,7 @@ right_sidebar_enabled = False}}
         <div class="col-sm">
 
             {{for item in artist_list:}}
-                <a href={{=URL('zectrl','audiobooks', vars=dict(selected_artist=item))}} style="text-decoration:none">
+                <a href={{=URL('zectrl','sound', vars=dict(selected_artist=item))}} style="text-decoration:none">
                 <div class="{{="dispfield bdIlluminating isselected" if selected_artist[0]==item[0] else "dispfield  bdFrenchblue "}}">
                     <div><b> {{=str(item[0])}}</b></div>
                     {{if len(item)==3: }} <div style="font-size: smaller; text-indent:30px;">{{=str(item[2]) + ' ' + sub_name1}}</div> {{pass}}
