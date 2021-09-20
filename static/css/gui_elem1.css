@@ -11,6 +11,14 @@
     background-color: #ff2020;
 }
 
+
+.dispfield.isselected {
+    border-right-width: 12px;
+    border-left-width: 12px;
+    border-radius: 8px 8px 8px 8px;
+    border-color: blue;
+}
+
 .dispfield.darkgr {
     /*background-color: #152222;*/
     background-color: #052e2e;
@@ -28,8 +36,6 @@
 }
 
 .dispfield.bordered {
-    /*color: #b0b010;*/
-    border-color: #9f301a;
     border-top-width: 1px;
     border-bottom-width: 1px;
     border-right-width: 3px;
@@ -44,6 +50,7 @@
 }
 .dispfield.bdIlluminating {
     border-color: #F5DF4D;
+    border-right-width: 10px;
 }
 .dispfield.bdRaspberry {
     border-color: #d2386c;
@@ -59,10 +66,9 @@
 }
 
 .dispfield:hover {
-    color: #303000;
+    color: #B0B0B0;
+    background-color: #353535;
 }
-
-
 
 
 .dispfield {
@@ -70,7 +76,7 @@
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
-    padding-right: 0px;
+    padding-right: 6px;
     margin: 3px 0;
     border: 1px solid #eee;
     border-left-color: #9f301a;

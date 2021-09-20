@@ -10,7 +10,6 @@ import data_helper
 def random_string_generator(str_size=10, allowed_chars=string.ascii_letters):
     return ''.join(random.choice(allowed_chars) for x in range(str_size))
 
-# TODO :filenot found error!!!
 
 def string_list(size, length=24):
     l = []
@@ -23,15 +22,8 @@ def string_list(size, length=24):
 def audiobooks():
     selected_artist = request.vars.get('selected_artist', ('', ''))
     media_list = []
-    print(selected_artist)
-    print(request.vars)
     if selected_artist[1]:
-        print("neue Buchliste von %s", selected_artist)
-        # media_list = string_list(39, 39)
-        media_list = data_helper.subfolders(selected_artist[1])
-    # artist_list = string_list(12, 12)
+         media_list = data_helper.subfolders(selected_artist[1], get_count=False)
     artist_list = data_helper.subfolders('/home/peterl/Comco/')
 
-    return dict(sliste=media_list, aliste=artist_list, selected_artist=selected_artist)
-
-
+    return dict(media_list=media_list, artist_list=artist_list, selected_artist=selected_artist, sub_name1='Books')
