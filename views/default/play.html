@@ -22,8 +22,7 @@ right_sidebar_enabled = False}}
         <div class="info__album">{{#=data['album'] if data.get('album') else data['file_path'].rsplit('/', 1)[1]}}</div>
         <div class="info__song">{{=data['playing'] if data.get('playing') else ''}}</div>
         <div class="info__artist">{{=data['artist'] if data.get('artist') else ''}}</div>
-        Current Time: {{=data['current_time'] if data.get('current_time') else '0'}}
-        Length: {{=data['length'] if data.get('length') else '0'}}
+
       </div>
 
       <div class="body__buttons">
@@ -31,6 +30,15 @@ right_sidebar_enabled = False}}
           <li><a href={{=URL('default','vlc_stop')}} class=""><i class="fa fa-stop"></i></a></li>
           <li><a href={{=URL('default','vlc_play')}} class="list__link"><i class="fa fa-play"></i></a></li>
           <li><a href={{=URL('default','vlc_pause')}} class="list__link"><i class="fa fa-pause"></i></a></li>
+          <li><a href={{=URL('default','vlc_forward')}} class="list__link"><i class="fa fa-step-forward"></i></a></li>
+        </ul>
+          <div class="body__info">
+
+          <div class="body__info">
+          <div class="info__album">Current Time: </div>
+          <div class="info__album">Length: {{=data['length'] if data.get('length') else '0'}}</div>
+           </div>
+          <ul class="list list--buttons">
           <li><a href={{=URL('default','vlc_forward')}} class="list__link"><i class="fa fa-step-forward"></i></a></li>
         </ul>
         <br><br>
@@ -64,6 +72,13 @@ right_sidebar_enabled = False}}
 
 </div>
 
+
+<div class="progress">
+  <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+       aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+    <span id="current-progress"></span>
+  </div>
+</div>
 
 
 
