@@ -8,6 +8,7 @@ import vlc_file_if
 
 # TODO: Auswertung Rückgabewert sender(), Start bei Aufruf play, Bookmark löschen/Play ohne Bookmark, Fehlerbehandlung
 
+
 # ---- example index page ----
 def index():
     return dict(message=T('Welcome to web2py!'))
@@ -49,10 +50,9 @@ def song():
 def play():
     if request.vars.get('error'):
         response.flash = T(str(request.vars.get('error')))
-
     vlcdata = vlc_file_if.VlCDataProvider()
     data = vlcdata.get_data('showfile')
-    print(data['file_path'])
+
     if data.get('file_path') and not data.get('album'):
         data['album'] = data['file_path'].rsplit('/', 1)[1]
     return dict(data=data)
@@ -80,6 +80,9 @@ def vlc_forward():
     client.sender('next_file')
     redirect(URL('default', 'play', vars=request.vars))
 
+def vlc_backward():
+    client.sender('previous_file')
+    redirect(URL('default', 'play', vars=request.vars))
 
 def vlc_delta_plus():
     client.sender('delta_volume', 10)
@@ -102,6 +105,11 @@ def do_play():
         ret = client.sender('set_file', request.vars.get('title', ''))
     if ret.get('error'):
         redirect(URL('default', 'play', vars=ret))
-
+    else:
+        vlc_play()
     redirect(URL('default', 'play'))
 
+
+def refresh_values():
+    print('refresh-values')
+    return

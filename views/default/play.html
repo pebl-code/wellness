@@ -7,7 +7,9 @@ right_sidebar_enabled = False}}
 {{end}}
 
 <style>
-    .body,
+    .body {
+        background-color: #ffff6f;
+    },
     .container,
     .player__footer {
         background-color: #114b6f;
@@ -19,26 +21,51 @@ right_sidebar_enabled = False}}
 
 <div class="container" >
       <div class="body__info">
-        <div class="info__album">{{#=data['album'] if data.get('album') else data['file_path'].rsplit('/', 1)[1]}}</div>
-        <div class="info__song">{{=data['playing'] if data.get('playing') else ''}}</div>
-        <div class="info__artist">{{=data['artist'] if data.get('artist') else ''}}</div>
-        Current Time: {{=data['current_time'] if data.get('current_time') else '0'}}
-        Length: {{=data['length'] if data.get('length') else '0'}}
+
+        <div class="dispfield bdIlluminating isselected">
+            <div><b> {{=data['playing'] if data.get('playing') else ''}}</b></div>
+            <div style="font-size: smaller; text-indent:30px;">{{=data['artist'] if data.get('artist') else ''}}</div>
+            <br>
+            <ul class="list list--buttons">
+
+                <li><a href={{=URL('default','vlc_stop')}} class=""><i class="fa fa-stop" style="color: #F5DF4D"></i></a></li>
+                <li><a href={{=URL('default','vlc_play')}} class="list__link"><i class="fa fa-play" style="color: #F5DF4D"></i></a></li>
+                <li><a href={{=URL('default','vlc_pause')}} class="list__link"><i class="fa fa-pause" style="color: #F5DF4D"></i></a></li>
+
+            </ul>
       </div>
 
-      <div class="body__buttons">
-        <ul class="list list--buttons">
-          <li><a href={{=URL('default','vlc_stop')}} class=""><i class="fa fa-stop"></i></a></li>
-          <li><a href={{=URL('default','vlc_play')}} class="list__link"><i class="fa fa-play"></i></a></li>
-          <li><a href={{=URL('default','vlc_pause')}} class="list__link"><i class="fa fa-pause"></i></a></li>
-          <li><a href={{=URL('default','vlc_forward')}} class="list__link"><i class="fa fa-step-forward"></i></a></li>
-        </ul>
+      <div class="dispfield bdIlluminating bdFrenchblue">
+           Current Time: {{=data['current_time'] if data.get('current_time') else '0'}}
+           Length: {{=data['length'] if data.get('length') else '0'}}
         <br><br>
-         <ul class="list list--buttons">
-        <li><a href={{=URL('default','vlc_delta_minus')}} class="list__link"><i class="fa fa-minus-circle"> </i></a></li>
-        {{=data['volume']}}
-        <li><a href={{=URL('default','vlc_delta_plus')}} class="list__link"><i class="fa fa-plus-circle"> </i></a></li>
-        </ul>
+          <ul class="list list--buttons">
+                <li><a href={{=URL('default','vlc_backward')}} class="list__link">
+                    <i class="fa fa-step-backward" style="color: #0072b5"></i></a></li>
+                <li><a href={{=URL('default','vlc_forward')}} class="list__link">
+                    <i class="fa fa-step-forward" style="color: #0072b5"></i></a></li>
+            </ul><br>
+        </div>
+        <div class="dispfield bdIlluminating bdRaspberry">
+           Volume    <br><br>
+            <ul class="list list--buttons">
+                 <li  style="padding-right: 1.5rem;"><a href={{=URL('default','vlc_delta_minus')}} class="list__link">
+                     <i class="fa fa-minus-circle" style="color: #d2386c"> </i></a></li>
+                {{=data['volume']}}
+                 <li><a href={{=URL('default','vlc_delta_plus')}} class="list__link">
+                     <i class="fa fa-plus-circle" style="color: #d2386c"> </i></a></li>
+            </ul><br>
+        </div>
+
+         <div class="dispfield bdIlluminating isselected">
+            <div><b> Bookmark </b></div>
+            <br>
+            {{if data['last_file']: }}
+                    <div style="font-size: smaller; text-indent:30px;">{{=data['last_file']}} - {{=data['playtime']}}</div>
+            {{pass}}
+            <br>
+
+         </div>
 
 
         <br><br>
@@ -52,19 +79,24 @@ right_sidebar_enabled = False}}
         <div class="body__info">
 
         Status: {{=data['status']}}
-        {{if data['last_file']: }}
-            <br>
-            {{='Bookmark: '}}
-            {{=data['last_file']}} - {{=data['playtime']}}
-            {{pass}}
-        </div>
+
       </div>
 
 
 
 </div>
 
+<div class="one" id="a">Hello</div>
+<div class="two" id="b">World</div>
 
 
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        window.setInterval(function() {
+            ajax('{{=URL('default', 'refresh_values')}}');
 
+        }, 3000);
+    });
+</script>
 
+alert('hi');
