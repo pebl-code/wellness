@@ -103,13 +103,10 @@ def do_play():
         ret = client.sender('set_folder', request.vars.get('album', ''))
     if request.vars.get('type') == 'file':
         ret = client.sender('set_file', request.vars.get('title', ''))
+
     if ret.get('error'):
         redirect(URL('default', 'play', vars=ret))
     else:
         vlc_play()
     redirect(URL('default', 'play'))
 
-
-def refresh_values():
-    print('refresh-values')
-    return

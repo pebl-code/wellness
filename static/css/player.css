@@ -167,13 +167,13 @@ a {
 .info__album {
   font-size: .75rem;
   font-weight: 300;
-  color: #666;
+  color: #944dff;
 }
 
 .info__song {
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: $color-red;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #b380ff;
 }
 
 .body__buttons {
@@ -236,4 +236,9 @@ a {
   &:hover {
     opacity: .9;
   }
+}
+
+.progress {
+  margin: 10px;
+  width: 50%;
 }
