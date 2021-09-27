@@ -56,8 +56,8 @@ def play():
     if data.get('file_path') and not data.get('album'):
         data['album'] = data['file_path'].rsplit('/', 1)[1]
 
-    data['play_time'] = data_helper.time_string_ms(data.get('play_time', 0))
-    data['length'] = data_helper.time_string_ms(data.get('length', 0))
+    data['play_time'] = data_helper.time_string_ms(data.get('play_time', 0) or 0)
+    data['length'] = data_helper.time_string_ms(data.get('length', 0) or 0)
 
     return dict(data=data)
 
@@ -127,17 +127,16 @@ def do_play():
 
 
 def refresh_playtime():
-
     vlcdata = vlc_file_if.VlCDataProvider()
     data = vlcdata.get_data('showfile')
-    data['play_time'] = data_helper.time_string_ms(data.get('play_time', 0))
+    data['play_time'] = data_helper.time_string_ms(data.get('play_time', 0) or 0)
     return 'Play time ' + str(data['play_time'])
 
 
 def refresh_length():
     vlcdata = vlc_file_if.VlCDataProvider()
     data = vlcdata.get_data('showfile')
-    data['length'] = data_helper.time_string_ms(data.get('length', 0))
+    data['length'] = data_helper.time_string_ms(data.get('length', 0) or 0)
     return 'Length ' + str(data['length'])
 
 

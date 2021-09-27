@@ -68,15 +68,26 @@ def read_json_file(path, filename):
 
 
 def time_string(seconds):
-    m, s = divmod(seconds, 60)
-    h, m = divmod(m, 60)
-    if h == 0:
-        return f'{m:02d}:{s:02d}'
-    return f'{h:02d}:{m:02d}:{s:02d}'
+    try:
+        m, s = divmod(seconds, 60)
+        h, m = divmod(m, 60)
+        if h == 0:
+            return f'{m:02d}:{s:02d}'
+        return f'{h:02d}:{m:02d}:{s:02d}'
+    except Exception as exc:
+        print('time_string: ', str(exc))
+        print('data', str(seconds), type(seconds))
+        return ''
 
 
 def time_string_ms(millis):
-    return time_string(int(round((millis/1000))))
+    try:
+        return time_string(int(round((millis/1000))))
+    except Exception as exc:
+        print('time_string_ms: ', str(exc))
+        print('data', str(millis), type(millis))
+        return ''
+
 
 
 if __name__ == '__main__':
