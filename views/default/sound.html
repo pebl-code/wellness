@@ -36,7 +36,7 @@ right_sidebar_enabled = False}}
         <div class="col-sm">
             {{#=selected_artist}}
             {{for item in media_list:}}
-                <a href={{=URL('default','do_play', vars=dict(album=item[1], artist=selected_artist, type='folder'))}} style="text-decoration:none">
+                <a href={{=URL('default','do_play', vars=dict(album=item[1], artist=selected_artist, type='file'))}} style="text-decoration:none">
                     <div class="dispfield  bdRaspberry">
                     <div><b> {{=str(item[0])}}</b></div>
         </div>

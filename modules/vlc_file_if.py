@@ -7,7 +7,7 @@ _VLC_FILES = ['media_file', 'media_folder', 'player', 'playing']
 
 _SELECTOR = {
     'showfile': ['playing.artist', 'playing.album',
-                 'playing.playing', 'playing.length', 'playing.current_time',
+                 'playing.playing', 'playing.length', 'playing.play_time',
                  'player.status', 'player.volume', 'player_mode',
                  'media_folder.bookmark.bookmark.last_file', 'media_folder.bookmark.bookmark.playtime',
                  'media_file.file_path'],

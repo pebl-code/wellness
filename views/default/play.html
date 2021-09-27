@@ -14,48 +14,41 @@ right_sidebar_enabled = False}}
     }
 </style>
 
-
-<meta http-equiv="refresh" content="500">
-
 <div class="container" >
       <div class="body__info">
 
         <div class="dispfield bdIlluminating isselected">
-            <div><b> {{=data['playing'] if data.get('playing') else ''}}</b></div>
-            <div style="font-size: smaller; text-indent:30px;">{{=data['artist'] if data.get('artist') else ''}}</div>
+            <b><div id="playing"> {{=data.get('playing', '')}}</div></b>
+            <div style="font-size: smaller; text-indent:30px;" id="artist">{{=data.get('artist', '')}}</div>
             <br>
             <ul class="list list--buttons">
-
+                <li><a href={{=URL('default','vlc_backward')}} class="list__link">
+                    <i class="fa fa-step-backward" style="color: #0072b5"></i></a></li>
                 <li><a href={{=URL('default','vlc_stop')}} class=""><i class="fa fa-stop" style="color: #F5DF4D"></i></a></li>
                 <li><a href={{=URL('default','vlc_play')}} class="list__link"><i class="fa fa-play" style="color: #F5DF4D"></i></a></li>
                 <li><a href={{=URL('default','vlc_pause')}} class="list__link"><i class="fa fa-pause" style="color: #F5DF4D"></i></a></li>
-
-            </ul>
-      </div>
-
-      <div class="dispfield bdIlluminating bdFrenchblue">
-           Current Time: {{=data['current_time'] if data.get('current_time') else '0'}}
-           Length: {{=data['length'] if data.get('length') else '0'}}
-        <br><br>
-          <ul class="list list--buttons">
-                <li><a href={{=URL('default','vlc_backward')}} class="list__link">
-                    <i class="fa fa-step-backward" style="color: #0072b5"></i></a></li>
                 <li><a href={{=URL('default','vlc_forward')}} class="list__link">
                     <i class="fa fa-step-forward" style="color: #0072b5"></i></a></li>
-            </ul><br>
-        </div>
+
+            </ul>
+            <br>
+            <div id="playtime">Play time: {{=data['play_time'] }} </div>
+            Length: {{=data['length']}}
+      </div>
+
+
         <div class="dispfield bdIlluminating bdRaspberry">
-           Volume    <br><br>
+
             <ul class="list list--buttons">
                  <li  style="padding-right: 1.5rem;"><a href={{=URL('default','vlc_delta_minus')}} class="list__link">
                      <i class="fa fa-minus-circle" style="color: #d2386c"> </i></a></li>
-                {{=data['volume']}}
+                <div id="volume"> Volume {{=data['volume']}}</div>
                  <li><a href={{=URL('default','vlc_delta_plus')}} class="list__link">
                      <i class="fa fa-plus-circle" style="color: #d2386c"> </i></a></li>
             </ul><br>
         </div>
 
-         <div class="dispfield bdIlluminating isselected">
+         <div class="dispfield bdIlluminating bdFrenchblue">
             <div><b> Bookmark </b></div>
             <br>
             {{if data['last_file']: }}
@@ -84,17 +77,15 @@ right_sidebar_enabled = False}}
 
 </div>
 
-<div class="one" id="a">Hello</div>
-<div class="two" id="b">World</div>
-
-
 <script type="text/javascript">
     jQuery(document).ready(function() {
         window.setInterval(function() {
-            ajax('{{=URL('default', 'refresh_values')}}');
+            ajax('{{=URL('default', 'refresh_playtime')}}', '', 'playtime');
+            ajax('{{=URL('default', 'refresh_length')}}', '', 'length');
+            ajax('{{=URL('default', 'refresh_playing')}}', '', 'playing');
+            ajax('{{=URL('default', 'refresh_artist')}}', '', 'artist');
+            ajax('{{=URL('default', 'refresh_volume')}}', '', 'volume');
 
-        }, 3000);
+        }, 1000);
     });
 </script>
-
-alert('hi');

@@ -55,6 +55,10 @@ def play():
 
     if data.get('file_path') and not data.get('album'):
         data['album'] = data['file_path'].rsplit('/', 1)[1]
+
+    data['play_time'] = data_helper.time_string_ms(data.get('play_time', 0))
+    data['length'] = data_helper.time_string_ms(data.get('length', 0))
+
     return dict(data=data)
 
 
@@ -80,9 +84,11 @@ def vlc_forward():
     client.sender('next_file')
     redirect(URL('default', 'play', vars=request.vars))
 
+
 def vlc_backward():
     client.sender('previous_file')
     redirect(URL('default', 'play', vars=request.vars))
+
 
 def vlc_delta_plus():
     client.sender('delta_volume', 10)
@@ -94,6 +100,14 @@ def vlc_delta_minus():
     redirect(URL('default', 'play', vars=request.vars))
 
 
+def vlc_play_index():
+    ret_value = client.sender('play_index')
+    if ret_value.get('error'):
+        print(ret_value.get('error'))
+    else:
+        redirect(URL('default', 'play', vars=request.vars))
+
+
 def do_something():
     redirect(URL('default', 'audiobooks'))
 
@@ -102,11 +116,49 @@ def do_play():
     if request.vars.get('type') == 'folder':
         ret = client.sender('set_folder', request.vars.get('album', ''))
     if request.vars.get('type') == 'file':
-        ret = client.sender('set_file', request.vars.get('title', ''))
+        ret = client.sender('set_file', request.vars.get('album', ''))
 
     if ret.get('error'):
         redirect(URL('default', 'play', vars=ret))
     else:
         vlc_play()
+
     redirect(URL('default', 'play'))
+
+
+def refresh_playtime():
+
+    vlcdata = vlc_file_if.VlCDataProvider()
+    data = vlcdata.get_data('showfile')
+    data['play_time'] = data_helper.time_string_ms(data.get('play_time', 0))
+    return 'Play time ' + str(data['play_time'])
+
+
+def refresh_length():
+    vlcdata = vlc_file_if.VlCDataProvider()
+    data = vlcdata.get_data('showfile')
+    data['length'] = data_helper.time_string_ms(data.get('length', 0))
+    return 'Length ' + str(data['length'])
+
+
+def refresh_playing():
+    vlcdata = vlc_file_if.VlCDataProvider()
+    data = vlcdata.get_data('showfile')
+    return str(data.get('playing', ''))
+
+def refresh_playing():
+    vlcdata = vlc_file_if.VlCDataProvider()
+    data = vlcdata.get_data('showfile')
+    return str(data.get('playing', ''))
+
+def refresh_artist():
+    vlcdata = vlc_file_if.VlCDataProvider()
+    data = vlcdata.get_data('showfile')
+    return str(data.get('artist', ''))
+
+def refresh_volume():
+    vlcdata = vlc_file_if.VlCDataProvider()
+    data = vlcdata.get_data('showfile')
+    return 'Volume ' + str(data.get('volume', ''))
+
 
