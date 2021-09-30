@@ -5,12 +5,9 @@ right_sidebar_enabled = False}}
 
 {{block header}}
 {{end}}
-
 <style>
-    .body,
-    .container,
-    .player__footer {
-        background-color: #114b6f;
+    .body, .footer {
+        background-color: #47476b;
     }
 </style>
 
@@ -48,26 +45,9 @@ right_sidebar_enabled = False}}
             </ul><br>
         </div>
 
-         <div class="dispfield bdIlluminating bdFrenchblue">
-            <div><b> Bookmark </b></div>
-            <br>
-            {{if data['last_file']: }}
-                    <div style="font-size: smaller; text-indent:30px;">{{=data['last_file']}} - {{=data['playtime']}}</div>
-            {{pass}}
-            <br>
-
-         </div>
-
 
         <br><br>
-        <ul class="list list--buttons">
-        <li><a href="#" class="list__link"><i class="fa fa-random"></i></a></li>
-        <li><a href="#" class="list__link"><i class="fa fa-undo"></i></a></li>
-        <li><a href="#" class="list__link"><i class="fa fa-ellipsis-h"></i></a></li>
-          </ul>
-
-
-        <div class="body__info">
+                <div class="body__info">
 
         Status: {{=data['status']}}
 
