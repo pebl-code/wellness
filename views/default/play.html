@@ -47,9 +47,8 @@ right_sidebar_enabled = False}}
 
 
         <br><br>
-                <div class="body__info">
-
-        Status: {{=data['status']}}
+                <div class="body__info">   Status:
+                    <div id="status"> {{=data['status']}}</div>
 
       </div>
 
@@ -65,6 +64,7 @@ right_sidebar_enabled = False}}
             ajax('{{=URL('default', 'refresh_playing')}}', '', 'playing');
             ajax('{{=URL('default', 'refresh_artist')}}', '', 'artist');
             ajax('{{=URL('default', 'refresh_volume')}}', '', 'volume');
+            ajax('{{=URL('default', 'refresh_status')}}', '', 'status');
 
         }, 1000);
     });

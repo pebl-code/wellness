@@ -145,10 +145,12 @@ def refresh_playing():
     data = vlcdata.get_data('showfile')
     return str(data.get('playing', ''))
 
-def refresh_playing():
+
+def refresh_status():
     vlcdata = vlc_file_if.VlCDataProvider()
     data = vlcdata.get_data('showfile')
-    return str(data.get('playing', ''))
+    return str(data.get('status', ''))
+
 
 def refresh_artist():
     vlcdata = vlc_file_if.VlCDataProvider()
